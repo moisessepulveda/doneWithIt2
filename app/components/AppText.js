@@ -1,14 +1,12 @@
 import React from "react";
 import {Text, StyleSheet, Platform} from "react-native";
+import defaultStyles from "../config/style"
 
-function AppText({children}) {
+function AppText({children, style}) {
     return(
-        <Text>{children}</Text>
+        <Text style={[defaultStyles.text, style]}>{children}</Text>
     )
 }
-// export default AppText
-
-
-
+export default AppText
 
 

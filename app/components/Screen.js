@@ -1,10 +1,12 @@
 import React from "react";
-import {StyleSheet, Platform, SafeAreaView} from "react-native";
+import {StyleSheet, Platform, SafeAreaView, View} from "react-native";
 
 
-function Screen({children}) {
+function Screen({children, style}) {
     return(
-       <SafeAreaView style={styles.screen}>{children}</SafeAreaView>
+        <SafeAreaView style={[styles.screen, style]}>
+            <View style={style}>{children}</View>
+        </SafeAreaView>
     )
 }
 export default Screen
