@@ -11,12 +11,14 @@ import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import MessagesScreen from "./app/screens/MessagesScreen";
 import Screen from "./app/components/Screen";
 import Icon from './app/components/icon';
-import ListItem from "./app/components/ListItem";
+import ListItem from "./app/components/lists/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingScreen from "./app/screens/ListingScreen";
 import AppTextInput from "./app/components/AppTextInput";
 import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
+import RegisterScreen from "./app/screens/RegisterScreen";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 
 export default function App() {
     const categories = [
@@ -32,7 +34,7 @@ export default function App() {
 
 
     return (
-        <LoginScreen />
+        <ListingEditScreen />
     );
 }
 
