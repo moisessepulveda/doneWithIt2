@@ -1,33 +1,25 @@
-import React, {useState} from "react";
-import {View, StyleSheet, Image} from "react-native";
+import React from "react";
+import {StyleSheet, Image} from "react-native";
 import Screen from "../components/Screen";
-import AppTextInput from "../components/AppTextInput";
-import AppButton from "../components/AppButton";
-import {Formik} from "formik";
-import * as yup from 'yup';
-import AppText from "../components/AppText";
-import ErrorMessage from "../components/ErrorMessage";
-import AppFormField from "../components/AppFormField";
 
+import * as yup from 'yup';
+
+import {AppForm, AppFormField, SubmitButton} from "../components/forms"
 
 const validationSchema = yup.object().shape({
     email: yup.string().required().email().label("Email"),
     password: yup.string().required().min(4).label("Password"),
 })
 
-function LoginScreen(props) {
+function LoginScreen() {
     return (
         <Screen style={styles.container}>
             <Image
                 style={styles.logo}
                 source={require('../assets/logo-red.png')}/>
-
-            <Formik initialValues={{email: '', password: ''}}
-                    onSubmit={(values)=> console.log(values)}
-                    validationSchema={validationSchema}
-                    >
-                { ({handleChange, handleSubmit, errors,setFieldTouched, touched}) => (
-                    <>
+            <AppForm initialValues={{email: '', password: ''}}
+                    onSubmit={(values) => console.log(values)}
+                    validationSchema={validationSchema}>
                         <AppFormField
                             autoCapitalize="none"
                             autoCorrect={false}
@@ -48,13 +40,8 @@ function LoginScreen(props) {
                             textContentType="password"
                             secureTextEntry={true}
                         />
-
-                        <AppButton title="Login" onPress={()=> handleSubmit}/>
-                    </>
-                )}
-            </Formik>
-
-
+                        <SubmitButton title="Login"/>
+            </AppForm>
         </Screen>
     )
 }
@@ -63,7 +50,7 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
     container: {
-      padding: 10
+        padding: 10
     },
     logo: {
         width: 80,
