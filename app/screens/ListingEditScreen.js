@@ -4,35 +4,42 @@ import {AppForm, AppFormField, SubmitButton} from "../components/forms";
 import Screen from "../components/Screen";
 import * as yup from "yup";
 import AppFormPicker from "../components/forms/AppFormPicker";
+import CategoryPickerItem from "../components/CategoryPickerItem";
+import colors from "../config/colors";
 
 
 const validationSchema = yup.object().shape({
-    category: yup.string().required().label("Category"),
+    title: yup.string().required().min(1).label("Title"),
+    price: yup.number().required().min(1).max(10000).label("Price"),
+    description: yup.string().label("Description"),
+    category: yup.object().required().nullable().label("Category"),
 })
 
 function ListEditScreen(props) {
 
     const items = [
         {
-            id: 1,
-            value: "ropa",
+            value: 1,
             label: "ropa",
+            backgroundColor: colors.primary,
+            icon: "email"
         },
         {
-            id: 2,
-            value: "zapatos",
+            value: 2,
             label: "zapatos",
+            backgroundColor: colors.secondary,
+            icon: "lock"
         },
         {
-            id: 3,
-            value: "ropa usada",
+            value: 3,
             label: "ropa usada",
+            backgroundColor: colors.dark,
+            icon: "apps"
         }
     ]
 
-    return(
+    return (
         <Screen style={styles.container}>
-
             <AppForm
                 initialValues={{category: ''}}
                 items={items}
@@ -45,8 +52,8 @@ function ListEditScreen(props) {
                     icon="account"
                     keyboardType="normal"
                     placeholder="Titulo"
-                    textContentType="text"
-                    name="Title"
+                    textContentType="none"
+                    name="title"
                 />
 
                 <AppFormField
@@ -55,18 +62,19 @@ function ListEditScreen(props) {
                     icon="account"
                     keyboardType="number"
                     placeholder="Precio"
-                    textContentType="number"
+                    textContentType="none"
                     name="price"
                 />
-
 
                 <AppFormPicker
                     items={items}
                     autoCapitalize="none"
                     autoCorrect={false}
                     icon="account"
+                    numberOfColumns={3}
                     keyboardType="normal"
                     placeholder="Categoria"
+                    PickerItemComponent={CategoryPickerItem}
                     textContentType="text"
                     name="categoria"
                 />
@@ -77,7 +85,7 @@ function ListEditScreen(props) {
                     icon="account"
                     keyboardType="normal"
                     placeholder="Descripción"
-                    textContentType="text"
+                    multiline
                     name="description"
                 />
 
@@ -87,6 +95,7 @@ function ListEditScreen(props) {
         </Screen>
     )
 }
+
 export default ListEditScreen
 
 const styles = StyleSheet.create({

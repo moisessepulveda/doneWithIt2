@@ -20,8 +20,8 @@ const initialMessages = [
     },
     {
         id: 3,
-        title: 'T3',
-        description: "D3",
+        title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi cumque delectus ex fugiat ipsu',
+        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi cumque delectus ex fugiat ipsum iste iusto maiores quasi reprehenderit rerum suscipit, vero! Accusamus ad aliquam dolore fuga incidunt quasi rem!",
         image: require('../assets/avatar3.png')
     },
     {
@@ -42,6 +42,7 @@ function MessagesScreen(props) {
     return(
         <Screen>
             <FlatList
+
                 data={messages}
                 keyExtractor={message => message.id.toString()}
                 ItemSeparatorComponent={()=> ListItemSeparator()}

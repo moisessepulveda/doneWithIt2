@@ -4,9 +4,6 @@ import {
     Button,
     StyleSheet,
     FlatList,
-    TextInput,
-    Platform,
-    StatusBar,
     TouchableWithoutFeedback,
     Modal
 } from "react-native";
@@ -17,17 +14,26 @@ import defaultStyles from "../config/style"
 import Screen from "./Screen";
 import PickerItem from "./PickerItem";
 
-function AppPicker({icon, items, onSelectItem, selectedItem, placeholder,}) {
+function AppPicker({
+                       icon,
+                       items,
+                       onSelectItem,
+                       PickerItemComponent = PickerItem,
+                       numberOfColumns = 1,
+                       selectedItem,
+                       placeholder,
+                       width = "100%"
+                   }) {
     const [modalVisible, setModalVisible] = useState(false)
     return (
         <View>
             <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-                <View style={styles.container}>
+                <View style={[styles.container, {width}]}>
                     {icon && <MaterialCommunityIcons name={icon}
                                                      size={20}
                                                      color={defaultStyles.colors.medium}
                                                      style={styles.icon}/>}
-                    <AppText style={styles.text}>{selectedItem ? selectedItem.label: placeholder}</AppText>
+                    <AppText style={styles.text}>{selectedItem ? selectedItem.label : placeholder}</AppText>
                     <MaterialCommunityIcons name="chevron-down" size={20} color={defaultStyles.colors.medium}/>
                 </View>
             </TouchableWithoutFeedback>
@@ -37,12 +43,15 @@ function AppPicker({icon, items, onSelectItem, selectedItem, placeholder,}) {
                     <FlatList
                         data={items}
                         keyExtractor={item => item.value.toString()}
+                        numColumns={numberOfColumns}
+                        numberOfColumns={numberOfColumns}
                         renderItem={({item}) => (
-                            <PickerItem label={item.label}
-                                        onPress={() => {
-                                            setModalVisible(false);
-                                            onSelectItem(item)
-                                        }}/>
+                            <PickerItemComponent
+                                item={item}
+                                onPress={() => {
+                                    setModalVisible(false);
+                                    onSelectItem(item)
+                                }}/>
                         )
                         }
                     />
@@ -59,7 +68,6 @@ const styles = StyleSheet.create({
         backgroundColor: defaultStyles.colors.lightGray,
         borderRadius: 25,
         flexDirection: "row",
-        width: "100%",
         padding: 15,
         marginVertical: 10
     },

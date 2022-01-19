@@ -4,10 +4,13 @@ import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 import defaultStyles from "../config/style"
 
-function AppTextInput({icon, ...otherProps}) {
+function AppTextInput({icon, width = "100%", ...otherProps}) {
     return(
-        <View style={styles.container}>
-            {icon && <MaterialCommunityIcons name={icon} size={20} color={defaultStyles.colors.medium} style={styles.icon}/> }
+        <View style={[styles.container, {width}]}>
+            {icon && <MaterialCommunityIcons
+                name={icon}
+                size={20}
+                color={defaultStyles.colors.medium} style={styles.icon}/> }
             <TextInput style={defaultStyles.text} {...otherProps}  />
         </View>
     )
