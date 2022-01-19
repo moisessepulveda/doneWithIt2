@@ -37,7 +37,8 @@ function MessagesScreen(props) {
                 keyExtractor={message => message.id.toString()}
                 ItemSeparatorComponent={()=> ListItemSeparator()}
                 renderItem={({item}) =>
-                        <ListItem
+                    <ListItem
+                        onPress={()=> console.log("pressed", item)}
                         title={item.title}
                         description={item.description}
                         image={item.image} />}
