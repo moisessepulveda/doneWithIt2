@@ -9,6 +9,7 @@ import ListingEditScreen from "./app/screens/ListingEditScreen";
 import Screen from "./app/components/Screen";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/NavigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
 const Tweets = ({navigation}) => (
     <Screen>
         <Text>tweets</Text>
@@ -58,7 +59,7 @@ const StackNavigator = () => (
 export default function App() {
     return (
         <NavigationContainer theme={navigationTheme}>
-            <AuthNavigator />
+            <AppNavigator />
         </NavigationContainer>
     );
 }
