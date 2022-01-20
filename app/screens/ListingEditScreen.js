@@ -1,10 +1,13 @@
-import React from "react";
-import {View, StyleSheet, Image} from "react-native";
+/*_EXTERNAL DEPENDENCIES_*/
+import {StyleSheet} from "react-native";
 import {AppForm, AppFormField, SubmitButton} from "../components/forms";
 import Screen from "../components/Screen";
 import * as yup from "yup";
+/*_INTERNAL_DEPENDENCIES_*/
 import AppFormPicker from "../components/forms/AppFormPicker";
 import CategoryPickerItem from "../components/CategoryPickerItem";
+import FormImagePicker from "../components/forms/FormImagePicker";
+import useLocation from "../hooks/useLocation";
 import colors from "../config/colors";
 
 
@@ -13,10 +16,11 @@ const validationSchema = yup.object().shape({
     price: yup.number().required().min(1).max(10000).label("Price"),
     description: yup.string().label("Description"),
     category: yup.object().required().nullable().label("Category"),
+    images: yup.array().min(1).label("Imagenes"),
 })
 
-function ListEditScreen(props) {
-
+function ListEditScreen() {
+    const location = useLocation();
     const items = [
         {
             value: 1,
@@ -41,16 +45,22 @@ function ListEditScreen(props) {
     return (
         <Screen style={styles.container}>
             <AppForm
-                initialValues={{category: ''}}
+                initialValues={{
+                    title: '',
+                    price: '',
+                    description: '',
+                    category: null,
+                    images: []
+                }}
                 items={items}
-                onSubmit={(values) => console.log(values)}
+                onSubmit={(values) => console.log(location)}
                 validationSchema={validationSchema}>
-
+                <FormImagePicker name="images" />
                 <AppFormField
                     autoCapitalize="none"
                     autoCorrect={false}
                     icon="account"
-                    keyboardType="normal"
+                    keyboardType="default"
                     placeholder="Titulo"
                     textContentType="none"
                     name="title"
@@ -60,7 +70,7 @@ function ListEditScreen(props) {
                     autoCapitalize="none"
                     autoCorrect={false}
                     icon="account"
-                    keyboardType="number"
+                    keyboardType="numeric"
                     placeholder="Precio"
                     textContentType="none"
                     name="price"
@@ -72,7 +82,7 @@ function ListEditScreen(props) {
                     autoCorrect={false}
                     icon="account"
                     numberOfColumns={3}
-                    keyboardType="normal"
+                    keyboardType="default"
                     placeholder="Categoria"
                     PickerItemComponent={CategoryPickerItem}
                     textContentType="text"
@@ -83,7 +93,7 @@ function ListEditScreen(props) {
                     autoCapitalize="none"
                     autoCorrect={false}
                     icon="account"
-                    keyboardType="normal"
+                    keyboardType="default"
                     placeholder="Descripción"
                     multiline
                     name="description"
@@ -95,6 +105,7 @@ function ListEditScreen(props) {
         </Screen>
     )
 }
+
 
 export default ListEditScreen
 
