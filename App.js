@@ -1,6 +1,7 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState, useEffect} from "react";
-import {StyleSheet, Button, Image, Text} from 'react-native';
+import {StyleSheet, Button, Image, Text, View} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createStackNavigator} from '@react-navigation/stack'
 import {NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -10,58 +11,32 @@ import Screen from "./app/components/Screen";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/NavigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
-const Tweets = ({navigation}) => (
-    <Screen>
-        <Text>tweets</Text>
-        <Button title="View twitt"
-        onPress={() => navigation.navigate("TweetDetails", {id: "hola"})}/>
-    </Screen>
-)
+import NetInfo, {useNetInfo} from '@react-native-community/netinfo';
+import AppText from "./app/components/AppText";
 
-const TweetDetails = ({route}) => (
-    <Screen>
-        <Text>details {route.params.id}</Text>
-    </Screen>
-)
+/*export default function App() {
 
-const Account = ({route}) => (
-    <Screen>
-        <Text>Account</Text>
-    </Screen>
-)
-
-const Tab = createBottomTabNavigator();
-const TabNavigator = () => (
-    <Tab.Navigator
-            tabBarOptions={{
-                activeBackgroundColor: "tomato",
-                activeTintColor: "white",
-                inactiveBackgroundColor: "#eee",
-                inactiveTintColor: "black"
-            }}
-        >
-        <Tab.Screen options={{
-            tabBarIcon: ({size, color})=> <MaterialCommunityIcons name="home" size={size} color={color}/>
-        }} name="Feed" component={StackNavigator} />
-        <Tab.Screen name="Account" component={Account} />
-    </Tab.Navigator>
-)
-
-
-const Stack = createStackNavigator();
-const StackNavigator = () => (
-    <Stack.Navigator>
-        <Stack.Screen  name="Tweets" component={Tweets} options={{title: "mi detalle"}} />
-        <Stack.Screen  name="TweetDetails" component={TweetDetails} />
-    </Stack.Navigator>
-)
-
-export default function App() {
     return (
         <NavigationContainer theme={navigationTheme}>
             <AppNavigator />
         </NavigationContainer>
     );
+}*/
+
+
+export default function App() {
+    const demo = async () => {
+        try {
+            await AsyncStorage.setItem("person", JSON.stringify({id: 1}));
+            const value = await AsyncStorage.getItem('person');
+            const person = JSON.parse(value);
+            console.log(person);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    demo();
+    return null;
 }
 
 const styles = StyleSheet.create({
