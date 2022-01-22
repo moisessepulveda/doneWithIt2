@@ -13,18 +13,22 @@ import navigationTheme from "./app/navigation/NavigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import NetInfo, {useNetInfo} from '@react-native-community/netinfo';
 import AppText from "./app/components/AppText";
-
-/*export default function App() {
-
-    return (
-        <NavigationContainer theme={navigationTheme}>
-            <AppNavigator />
-        </NavigationContainer>
-    );
-}*/
-
+import OfflineNotice from "./app/components/OfflineNotice";
 
 export default function App() {
+
+    return (
+        <>
+            <OfflineNotice />
+            <NavigationContainer theme={navigationTheme}>
+                <AppNavigator/>
+            </NavigationContainer>
+        </>
+    );
+}
+
+
+/*export default function App() {
     const demo = async () => {
         try {
             await AsyncStorage.setItem("person", JSON.stringify({id: 1}));
@@ -37,7 +41,7 @@ export default function App() {
     }
     demo();
     return null;
-}
+}*/
 
 const styles = StyleSheet.create({
     container: {

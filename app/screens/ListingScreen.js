@@ -33,7 +33,8 @@ function ListingScreen({navigation}) {
                               onPress={() => {
                                   navigation.navigate(routes.LISTING_DETAILS, item)
                               }}
-                              imageUrl={item.images[0].url}/>
+                              imageUrl={item.images[0].url}
+                              thumbnailUrl={item.images[0].thumbnailUrl}/>
                       }/>
         </Screen>
     )
