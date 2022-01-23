@@ -6,6 +6,7 @@ import ListItem from '../components/lists/ListItem'
 import Icon from "../components/icon";
 import colors from "../config/colors";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
+import useAuth from "../auth/useAuth";
 
 const menuItems = [
     {
@@ -25,13 +26,17 @@ const menuItems = [
     },
 ]
 function AccountScreen({navigation}) {
+
+    const {user, logOut} = useAuth();
+
+
     return(
         <Screen style={styles.screen}>
             <View style={styles.container}>
                 <ListItem
                     image=""
-                    title="Moisés Sepúlveda"
-                    description="mo.sepulvedar@gmail.com"
+                    title={user.name}
+                    description={user.email}
                     image={require('../assets/avatar5.png')}/>
             </View>
             <View style={styles.container}>
@@ -51,6 +56,7 @@ function AccountScreen({navigation}) {
             </View>
             <ListItem
                 title="Cerrar Sesión"
+                onPress={() => logOut()}
                 ImageComponnent={
                     <Icon name="logout"
                           backgroundColor="#ffe66d" />

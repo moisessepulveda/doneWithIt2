@@ -18,25 +18,27 @@ function ListingScreen({navigation}) {
     }, [])
 
     return (
-        <Screen style={styles.screen}>
-            {getListingsApi.error && <>
-                <AppText>No se han podido obtener los datos</AppText>
-                <Button title="Reintentar" onPress={() => getListingsApi.request()}/>
-            </>}
+        <>
             <ActivityIndicator visible={getListingsApi.loading}/>
-            <FlatList data={getListingsApi.data}
-                      keyExtractor={listing => listing.id.toString()}
-                      renderItem={({item}) =>
-                          <Card
-                              title={item.title}
-                              subtitle={"$" + item.price}
-                              onPress={() => {
-                                  navigation.navigate(routes.LISTING_DETAILS, item)
-                              }}
-                              imageUrl={item.images[0].url}
-                              thumbnailUrl={item.images[0].thumbnailUrl}/>
-                      }/>
-        </Screen>
+            <Screen style={styles.screen}>
+                {getListingsApi.error && <>
+                    <AppText>No se han podido obtener los datos</AppText>
+                    <Button title="Reintentar" onPress={() => getListingsApi.request()}/>
+                </>}
+                <FlatList data={getListingsApi.data}
+                          keyExtractor={listing => listing.id.toString()}
+                          renderItem={({item}) =>
+                              <Card
+                                  title={item.title}
+                                  subtitle={"$" + item.price}
+                                  onPress={() => {
+                                      navigation.navigate(routes.LISTING_DETAILS, item)
+                                  }}
+                                  imageUrl={item.images[0].url}
+                                  thumbnailUrl={item.images[0].thumbnailUrl}/>
+                          }/>
+            </Screen>
+        </>
     )
 }
 
